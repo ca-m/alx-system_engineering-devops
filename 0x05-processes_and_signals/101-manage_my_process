@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#manages script manage_my_process
+#	when passed argument `start`:
+#		1. starts manage_my_process
+#		2. creates file containing its PID in /var/run/my_process.pid
+#		3. displays "manage_my_process started"
+#	when passed argument `stop`:
+#		1. stops manage_my_process
+#		2. deletes file /var/run/my_process.pid
+#		3. displays "manage_my_process stopped"
+#	when passed the argument `restart`:
+#		1. stops manage_my_process
+#		2. deletes file /var/run/my_process.pid
+#		3. starts manage_my_process
+#		4. creates file containing its PID in /var/run/my_process.pid
+#		5. displays "manage_my_process restarted"
+#	if any other or no arguments are passed, displays
+#	"Usage: manage_my_process {start|stop|restart}"
+
+if [ "$1" == "start" ]
+then
+	./manage_my_process &
+	echo $$ > /var/run/my_process.pid
+	echo "manage_my_process started"
+
+elif [ "$1" == "stop" ]
+then
+	kill "$(pgrep -f /manage_my_process)"
+	rm /var/run/my_process.pid
+	echo "manage_my_process stopped"
+
+elif [ "$1" == "restart" ]
+then
+	kill "$(pgrep -f /manage_my_process)"
+	rm /var/run/my_process.pid
+	./manage_my_process &
+	echo $$ > /var/run/my_process.pid
+	echo "manage_my_process restarted"
+
+else
+	echo "Usage: manage_my_process {start|stop|restart}"
+fi
