@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#displays list of currently running processes containing bash keyword
+#	hellcheck disable=SC2009
+
+ps -aux | grep bash
