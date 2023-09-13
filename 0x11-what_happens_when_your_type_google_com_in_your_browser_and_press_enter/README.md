@@ -1,3 +1,3 @@
 ALX System Engineering DevOps
-Project 0x11: What Happens When You Type Google In Your Browser and Press Enter
+Project 0x11: What happens when you type google.com in your browser and press Enter 
 DevOps; Network; SysAdmin
